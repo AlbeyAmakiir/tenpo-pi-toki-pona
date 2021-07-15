@@ -29,12 +29,43 @@ s" date-maths.fs" included
 : sikeenmunensuno ( n -- n1 n2 n3 )
   sikeensuno munensuno ;
 
+: nimimun ( n -- c-addr u )
+    case
+      1 of s" Wan" endof
+      2 of s" Kon" endof
+      3 of s" Seli" endof
+      4 of s" Ma" endof
+      5 of s" Telo" endof
+      6 of s" Mama" endof
+      7 of s" Kasi" endof
+      8 of s" Pipi" endof
+      9 of s" Kala" endof
+      10 of s" Akesi" endof
+      11 of s" Waso" endof
+      12 of s" Soweli" endof
+      13 of s" Namako" endof
+    endcase ;
+
 : sunotangeorgian ( n-day n-month n-year -- n )
   >r >r >r day0 month0 year0 r> r> r> daydiffyear
   ; \ This one line is the *only reason* I wrote date-maths.fs
-: tenpotangeorgian ( n-day n-month n-year -- n-suno n-mun n-sike )
-  \ suno pini lon tenpo georgian li suno sin lon tenpo pi toki pona
-  sunotangeorgian sikeenmunensuno swap rot ;
+: tenpotangeorgian ( f n-day n-month n-year -- n-suno n-mun n-sike )
+  \ suno weka lon tenpo georgian li suno sin lon tenpo pi toki pona
+  sunotangeorgian swap + sikeenmunensuno swap rot ;
+: beforesunset ( n-sec n-min n-hour -- f )
+  \ For now, just making it past 6pm. Theoretically, lonlat+date, I could solve. But eh...
+  18 < nip nip ;
+
+: tenponi ( -- n-suno n-mun n-sike )
+  time&date >r >r >r beforesunset r> r> r> tenpotangeorgian ;
+: tokietenpo ( n-suno n-mun n-sike -- )
+  s" tenpo pi toki pona" type cr
+  s" ------------------" type cr
+  s" tenpo sike  " type . cr
+  s" tenpo mun   " type nimimun type cr
+  s" tenpo suno  " type . cr
+  s" ------------------" type cr ;
+: tokietenponi ( -- ) tenponi tokietenpo ;
 
 
 

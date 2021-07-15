@@ -140,12 +140,24 @@ s" tenpo-pi-suno-mun.fs" included
 : testtenpotangeorgian
   s" Test word tenpotangeorgian: " type
   try
-    assert( 26 3 2001 tenpotangeorgian 0= -rot 1 = -rot 1 = and and )
-    assert( 3 11 2019 tenpotangeorgian 18 = -rot 8 = -rot 9 = and and )
-    assert( 21 3 2020 tenpotangeorgian 18 = -rot 12 = -rot 30 = and and )
-    assert( 22 3 2020 tenpotangeorgian 19 = -rot 1 = -rot 1 = and and )
-    assert( 14 7 2021 tenpotangeorgian 20 = -rot 5 = -rot 8 = and and )
+    assert( false 26 3 2001 tenpotangeorgian 0= -rot 1 = -rot 1 = and and )
+    assert( false 3 11 2019 tenpotangeorgian 18 = -rot 8 = -rot 9 = and and )
+    assert( true 3 4 2019 tenpotangeorgian 17 = -rot 13 = -rot 30 = and and )
+    assert( false 3 4 2019 tenpotangeorgian 18 = -rot 1 = -rot 1 = and and )
+    assert( false 21 3 2020 tenpotangeorgian 18 = -rot 12 = -rot 30 = and and )
+    assert( false 22 3 2020 tenpotangeorgian 19 = -rot 1 = -rot 1 = and and )
+    assert( false 14 7 2021 tenpotangeorgian 20 = -rot 5 = -rot 8 = and and )
     \ Sunset on the 14th of June, 2021 is the beginning of toki pona year 20, month 5, day 8
+    s"   Passed" type cr
+  endtry-iferror
+    s" --- FAILED ---" type cr
+  then ;
+
+: testbeforesunset
+  s" Test word beforesunset: " type
+  try
+    assert( 59 59 17 beforesunset 0<> )
+    assert( 0 0 18 beforesunset 0= )
     s"   Passed" type cr
   endtry-iferror
     s" --- FAILED ---" type cr
@@ -166,5 +178,6 @@ s" tenpo-pi-suno-mun.fs" included
   testsike8ensuno testsikeensunolili testmunensuno
   testsikeensuno testsikeenmunensuno
   testsunotangeorgian testtenpotangeorgian
+  testbeforesunset
   cr ;
 
