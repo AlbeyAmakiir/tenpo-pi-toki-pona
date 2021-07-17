@@ -163,6 +163,45 @@ s" tenpo-pi-suno-mun.fs" included
     s" --- FAILED ---" type cr
   then ;
 
+: testtenpotawatenpolili
+  s" Test word tenpotawatenpolili: " type
+  try
+    assert( 0 1 tenpotawatenpolili 0= )
+    assert( 1 1 tenpotawatenpolili 1 = )
+    assert( 23 1 tenpotawatenpolili 23 = )
+    assert( 0 2 tenpotawatenpolili 24 = )
+    assert( 1 2 tenpotawatenpolili 25 = )
+    assert( 23 2 tenpotawatenpolili 47 = )
+    assert( 0 3 tenpotawatenpolili 48 = )
+    s"   Passed" type cr
+  endtry-iferror
+    s" --- FAILED ---" type cr
+  then ;
+
+: testnanpasitelenmun
+  s" Test word nanpasitelenmun: " type
+  try
+    assert( 0 720 nanpasitelenmun 0= )
+    assert( 615 696 nanpasitelenmun 18 = )
+    assert( 615 720 nanpasitelenmun 17 = )
+    assert( 719 720 nanpasitelenmun 0= )
+    assert( 721 720 nanpasitelenmun 0= )
+    s"   Passed" type cr
+  endtry-iferror
+    s" --- FAILED ---" type cr
+  then ;
+
+: testfullconversion
+  s" Test word full-conversion: " type
+  try
+    assert( 0 0 hour0 day0 1+ month0 year0 full-conversion
+            0= swap 0= and swap 1 = and swap 1 = and )
+    assert( 0 0 23 17 7 2021 full-conversion 7 = swap 20 = and swap 5 = and swap 11 = and )
+    s"   Passed" type cr
+  endtry-iferror
+    s" --- FAILED ---" type cr
+  then ;
+
 : testtemplate
   s" Test word <template>: " type
   try
@@ -179,5 +218,23 @@ s" tenpo-pi-suno-mun.fs" included
   testsikeensuno testsikeenmunensuno
   testsunotangeorgian testtenpotangeorgian
   testbeforesunset
+  testtenpotawatenpolili testnanpasitelenmun
+  testfullconversion
   cr ;
+
+\ Just a visual test
+: animatemun
+  0 >r 0 0 \ day loop \ hour
+  begin
+    1+ dup 3000000 >= if
+      drop \ day \ hour
+      r> 1+ dup >r \ day hour \ hour
+      24 >= if \ day \ hour
+        1+ r> drop 0 >r
+      endif
+      r@ over \ day hour day \ hour
+      sikeenmunensuno swap rot hsms-smsn tokietenpo
+      0
+    endif
+  false until ;
 
