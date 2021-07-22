@@ -197,6 +197,10 @@ s" tenpo-pi-suno-mun.fs" included
     assert( 0 0 hour0 day0 1+ month0 year0 full-conversion
             0= swap 0= and swap 1 = and swap 1 = and )
     assert( 0 0 23 17 7 2021 full-conversion 7 = swap 20 = and swap 5 = and swap 11 = and )
+
+    assert( 0 0 22 22 7 2021 full-conversion 10 = swap 20 = and swap 5 = and swap 16 = and )
+    assert( 0 0 23 22 7 2021 full-conversion 11 = swap 20 = and swap 5 = and swap 16 = and )
+    assert( 0 0 0 23 7 2021 full-conversion 11 = swap 20 = and swap 5 = and swap 16 = and )
     s"   Passed" type cr
   endtry-iferror
     s" --- FAILED ---" type cr

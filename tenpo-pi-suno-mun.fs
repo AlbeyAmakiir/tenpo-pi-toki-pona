@@ -88,9 +88,9 @@ s" file-io.fs" included
 
 : hsms-smsn ( n-hour n-suno n-mun n-sike -- n-suno n-mun n-sike n-nanpamun )
   >r swap >r dup muntawatenpolili \ h mu mh / si su
-  rot r@ tenpotawatenpolili 6 - \ mu mh hh6 / si su
-  dup 0< \ mu mh hh6 f / si su
-  if over + endif \ mu mh hh / si su
+  \ rot tenpotawatenpolili 6 - \ mu mh hh6 / si su
+  \ dup 0< \ mu mh hh6 f / si su
+  rot 6 + dup 23 > if 24 - endif r@ tenpotawatenpolili \ mu mh hh / si su
   swap nanpasitelenmun \ mu mn / si su
   r> -rot r> swap ; \ su mu si mn
   
