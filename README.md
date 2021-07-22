@@ -21,9 +21,16 @@ ni li kepeken ilo "[Gforth](https://gforth.org/)". mi kepeken nanpa `0.7.3` ona 
 $ gforth tenpo-pi-suno-mun.fs -e tokietenponi -e bye
 tenpo pi toki pona
 ------------------
+      _...
+    .::::::.
+   ::::::::::
+   ::::::::::
+   `::::::::'
+     `':::'
+
 tenpo sike  20 
 tenpo mun   Telo
-tenpo suno  9 
+tenpo suno  16 
 ------------------
 ```
 
